@@ -25,9 +25,23 @@ blocks = [
   ],
 ]
 
+def payload = JsonOutput.toJson([
+      "username": "Production Deployer",
+      "icon_emoji": ":robot_face:",
+      "mrkdwn": true,
+      "attachments": [
+         [
+            "mrkdwn_in": ['text','pretext'],
+            "color": "#199515",
+            "text": "*$JOB_NAME:* <$BUILD_URL|Build #$BUILD_NUMBER>, _microservice_ in _${clusterName}_ successfully updated.",
+            "fallback": "*Production Deployer*: operation succeeded."
+        ]
+      ]
+   ])
+
 def call(String buildResult) {
   if ( buildResult == "SUCCESS" ) {
-    slackSend blocks: blocks
+    slackSend(payload())
   }
   else if( buildResult == "FAILURE" ) { 
     slackSend color: "danger", message: "BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed ! more info ${env.BUILD_URL}"
