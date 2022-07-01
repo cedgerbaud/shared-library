@@ -2,7 +2,7 @@
 
 def call(String buildResult) {
   if ( buildResult == "SUCCESS" ) {
-    slackSend color: "good", message: "CONGRATULATION: A320 est en route, vive Thales ! more info ${env.BUILD_URL}"
+    slackSend color: "good", message: "<a href='https://www.thalesgroup.com/en'><img src='https://img.shields.io/badge/Thales-100%25-blue.svg?style=for-the-badge&logo=airbus'/></a>CONGRATULATION: A320 est en route, vive Thales ! more info ${env.BUILD_URL}"
   }
   else if( buildResult == "FAILURE" ) { 
     slackSend color: "danger", message: "BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed ! more info ${env.BUILD_URL}"
