@@ -27,7 +27,7 @@ blocks = [
 
 def call(String buildResult) {
   if ( buildResult == "SUCCESS" ) {
-    slackSend(channel: "test_notif_jenkins", blocks: blocks)
+    slackSend blocks: blocks
   }
   else if( buildResult == "FAILURE" ) { 
     slackSend color: "danger", message: "BAD NEWS:Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed ! more info ${env.BUILD_URL}"
